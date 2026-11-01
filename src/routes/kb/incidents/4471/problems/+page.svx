@@ -1,0 +1,49 @@
+---
+layout: runbook
+title: '#4471 is three problems'
+owner: ernestthe8
+status: open
+reviewed: 2026-11-01
+signature: ernestthe8
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const repo = 'https://github.com/ernestthe8/s01e03-what-it-shows/issues';
+  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, shift: `${repo}/3` };
+</script>
+
+[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. The reports in it say
+otherwise. They share a symptom (the date is wrong), not a cause, so one fix will not close them all.
+
+<Callout kind="warn">
+The queued parser fix leaves two problems open. Each now has its own ticket.
+</Callout>
+
+## The problems
+
+<ProblemTable ticket={4471} {tickets} />
+
+- **parser**: the shared parser reads every date month first, and every tenant on file writes the
+  day first. `7/4` (7 April) becomes 4 July.
+- **hint**: the booking-v3 form prints `MM/DD/YYYY` under its date field. People follow it and type
+  month first, and the form reads the date day first. The parser fix does not reach these.
+- **shift**: the date moves by one day, e.g. "Client in Lisbon got Tuesday. Client in Toronto got
+  Monday." No day and month swap here. The desk's own notes list these as a one-day move.
+
+## How they were split
+
+Same rules the kb already runs (`#lib/kb/causes`): the cause comes from the tenant's locale, its
+booking form and the channel, not from the subject line or the intake tag. On top of that, the
+reports in `desk-notes.json` under `oneDayMove` count as their own problem.
+
+## Why one ticket hid three
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject) merges reports on subject alone. A subject
+line says the date is wrong; it cannot say why. The decision is accepted, so it stays as written;
+a new record should replace it.
+
+<RenderStamp {signature} />
