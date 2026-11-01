@@ -4,7 +4,7 @@ title: '#4471 is three problems'
 owner: ernestthe8
 status: open
 reviewed: 2026-11-01
-signature: ernestthe8
+signature: v1.eyJzdWIiOiIxMzUwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM1MjYzMjgsImV4cCI6MTc5MzYxMjcyOH0.V-0BMF1mJdB2w3h8PjfTcXb1DIDnYjhx82iOPrDhqBU
 ---
 
 <script>
