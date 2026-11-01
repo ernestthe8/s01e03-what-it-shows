@@ -41,6 +41,11 @@
   </tbody>
 </table>
 
+{#each groups.filter((g) => g.problem === 'shift') as g (g.problem)}
+  <p class="note">The {g.reports.length} <code>shift</code> reports are also counted under the problem the desk files them under by tenant, so the rows add up to more than {total}.</p>
+{/each}
+
 <style>
   .sum { font-size: 1.1rem; }
+  .note { color: var(--muted); font-size: 0.85em; }
 </style>
